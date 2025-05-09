@@ -1,0 +1,9 @@
+venv\Scripts\activate
+
+flask run
+
+flask db migrate
+
+flask db upgrade
+
+u = User(username='bozydar', email='bozydar@gmail.com')
