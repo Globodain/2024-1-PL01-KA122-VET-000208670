@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Zarejestruj Się</h1>
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{form.nazwa.label}} <br>
+            {{ form.nazwa(size="35") }}<br>
+            {% for error in form.nazwa.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{form.haslo.label}} <br>
+            {{ form.haslo(size="35") }}<br>
+            {% for error in form.haslo.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.pamietaj_mnie() }} {{ form.pamietaj_mnie.label }}</p>
+        <p> {{ form.submit() }}</p>
+    </form>
+{% endblock %}
