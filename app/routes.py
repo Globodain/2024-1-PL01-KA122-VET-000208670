@@ -10,7 +10,6 @@ from urllib.parse import urlsplit
 @app.route('/')
 @app.route('/index')
 @login_required
-
 def index():
     posts = [
         {
@@ -30,7 +29,7 @@ def login():
         return redirect(url_for('index'))
     form = LoginForm()
     if form.validate_on_submit():
-        user = db.session.scelar(sqlalchemy.select(User).where(User.username == form.username.data))
+        user = db.session.scalar(sqlalchemy.select(User).where(User.username == form.username.data))
         if user is None or not user.check_password(form.password.data):
             flash('Invalid username or password')
             return redirect(url_for('login'))
@@ -59,3 +58,20 @@ def register():
         flash('Congratulations, you are now a registered user!')
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
+
+@app.route('/user/<username>')
+@login_required
+def user(username):
+    user = db.first_or_404(sqlalchemy.select(User).where(User.username == username))
+    posts = [
+        {
+            'author': user,
+            'body': 'Test post #1'
+        },
+        {
+            'author': user,
+            'body': 'Test post #2'
+        }
+    ]
+    return render_template('user.html', user=user, posts=posts)
+
