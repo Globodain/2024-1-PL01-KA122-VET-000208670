@@ -1,0 +1,14 @@
+{%extends "base.html"%}
+
+{%block content%}
+    <!-- Posts -->
+    <h2> Posts </h2>
+    {%for post in relatedPost%}
+        <div class="userPost">
+            <h4> {{ post['author']['username'] }} </h4>
+            <p>
+                {{ post['body'] }}
+            </p>
+        </div>
+    {%endfor%}
+{%endblock%}

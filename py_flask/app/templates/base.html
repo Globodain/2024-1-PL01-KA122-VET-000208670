@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pl=PL">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% if title %}
+            <title>{{ title }} - PY</title>
+        {% else %}
+            <title>PY</title>
+        {% endif %}
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('index') }}">home</a></li>
+                <li><a href="{{ url_for('login') }}">login</a></li>
+            </ul>
+        </nav>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </body>
+</html>
