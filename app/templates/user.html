@@ -1,11 +1,25 @@
-{% extends base.html %}
+{% extends "base.html" %}
 
 {% block content %}
-    <h1>Użytkownik: {{ user.nazwa }}</h1>
+    <table>
+        <tr valign="top">
+            <td><img src="{{ user.avatar(128) }}"></td>
+            <td>
+                <h1>Użytkownik: {{ user.nazwa }}</h1>
+                {% if user == current_user %}
+                <p><a href="{{ url_for('edytuj_profil') }}">Edytuj Profil</a></p>
+                {% endif %}
+                {% if user.o_mnie %}<p>{{ user.o_mnie }}</p>{% endif %}
+                {% if user.ostatnio_widziany %}
+                <p>
+                    Ostatnio widziany: {{ user.ostatnio_widziany }}
+                </p>
+                {% endif %}
+            </td>
+        </tr>
+    </table>
     <hr>
     {% for post in posts %}
-    <p>
-        {{ post.author.nazwa }} odrzekł: <b>{{ post.body }}</b>
-    </p>
+        {% include '_post.html' %}
     {% endfor %}
 {% endblock %}

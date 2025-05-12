@@ -1,11 +1,11 @@
 from flask import request, render_template, flash, redirect, url_for
-from app import app
-from app.forms import LoginForm, RegistrationForm
+from app import app, db
+from app.forms import LoginForm, RegistrationForm, EditProfileForm
 from flask_login import current_user, login_user, logout_user, login_required
 import sqlalchemy as sa
-from app import db
 from app.models import User
 from urllib.parse import urlsplit
+from datetime import datetime, timezone
 
 @app.route('/')
 @app.route('/index')
@@ -60,7 +60,7 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
 
-@app.route('user/<nazwa>')
+@app.route('/user/<nazwa>')
 @login_required
 def user(nazwa):
     user = db.first_or_404(sa.select(User).where(User.nazwa == nazwa))
@@ -69,3 +69,24 @@ def user(nazwa):
         {'author': user, 'body': 'Tescik numer 2'}
     ]
     return render_template('user.html', user=user, posts=posts)
+
+@app.before_request
+def before_request():
+    if current_user.is_authenticated:
+        current_user.ostatnio_widziany = datetime.now(timezone.utc)
+        db.session.commit()
+
+@app.route('/edytuj_profil', methods=['GET', 'POST'])
+@login_required
+def edytuj_profil():
+    form = EditProfileForm()
+    if form.validate_on_submit():
+        current_user.nazwa = form.nazwa.data
+        current_user.o_mnie = form.o_mnie.data
+        db.session.commit()
+        flash('Zmiany zostały zapisane.')
+        return redirect(url_for('edytuj_profil'))
+    elif request.method == 'GET':
+        form.nazwa.data == current_user.nazwa
+        form.o_mnie.data = current_user.o_mnie
+    return render_template('edit_profile.html', title='Edytuj Profil', form=form)

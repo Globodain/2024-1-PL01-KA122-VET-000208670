@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Edytuj Profil</h1>
+    <form action="" method="post">
+        {{form.hidden_tag()}}
+        <p>
+            {{ form.nazwa.label }}<br>
+            {{ form.nazwa(size=32) }}<br>
+            {% for error in form.nazwa.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.o_mnie.label }}<br>
+            {{ form.o_mnie(cols=50, rows=4) }}<br>
+            {% for error in form.o_mnie.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p> {{ form.submit() }} </p>
+    </form>
+{% endblock %}
