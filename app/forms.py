@@ -49,3 +49,6 @@ class EditProfileForm(FlaskForm):
             user = db.session.scalar(sa.select(User).where(User.nazwa == nazwa.data))
             if user is not None:
                 raise ValidationError('Ta nazwa jest zajęta!')
+            
+class EmptyForm(FlaskForm):
+    submit = SubmitField('Submit')

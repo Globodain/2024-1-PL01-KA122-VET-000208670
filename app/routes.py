@@ -1,6 +1,6 @@
 from flask import request, render_template, flash, redirect, url_for
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, EditProfileForm
+from app.forms import LoginForm, RegistrationForm, EditProfileForm, EmptyForm
 from flask_login import current_user, login_user, logout_user, login_required
 import sqlalchemy as sa
 from app.models import User
@@ -68,7 +68,8 @@ def user(nazwa):
         {'author': user, 'body': 'Tescik numer 1'},
         {'author': user, 'body': 'Tescik numer 2'}
     ]
-    return render_template('user.html', user=user, posts=posts)
+    form = EmptyForm()
+    return render_template('user.html', user=user, posts=posts, form=form)
 
 @app.before_request
 def before_request():
@@ -90,3 +91,43 @@ def edytuj_profil():
         form.nazwa.data == current_user.nazwa
         form.o_mnie.data = current_user.o_mnie
     return render_template('edit_profile.html', title='Edytuj Profil', form=form)
+
+@app.route('/follow/<nazwa>', methods=['POST'])
+@login_required
+def follow(nazwa):
+    form = EmptyForm()
+    if form.validate_on_submit():
+        user = db.session.scalar(
+            sa.select(User).where(User.nazwa == nazwa))
+        if user is None:
+            flash(f'Nie znaleziono użytkownika {nazwa}.')
+            return redirect(url_for('index'))
+        if user == current_user:
+            flash('Nie możesz obserwować siebie!')
+            return redirect(url_for('user', nazwa=nazwa))
+        current_user.follow(user)
+        db.session.commit()
+        flash(f'Obserwujesz {nazwa}!')
+        return redirect(url_for('user', nazwa=nazwa))
+    else:
+        return redirect(url_for('index'))
+
+@app.route('/unfollow/<nazwa>', methods=['POST'])
+@login_required
+def unfollow(nazwa):
+    form = EmptyForm()
+    if form.validate_on_submit():
+        user = db.session.scalar(
+            sa.select(User).where(User.nazwa == nazwa))
+        if user is None:
+            flash(f'Nie znaleziono użytkownika {nazwa}.')
+            return redirect(url_for('index'))
+        if user == current_user:
+            flash('Nie możesz od-obserwować siebie!')
+            return redirect(url_for('user', nazwa=nazwa))
+        current_user.unfollow(user)
+        db.session.commit()
+        flash(f'Przestałeś obserwować {nazwa}!')
+        return redirect(url_for('user', nazwa=nazwa))
+    else:
+        return redirect(url_for('index'))

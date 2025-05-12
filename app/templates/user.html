@@ -6,13 +6,28 @@
             <td><img src="{{ user.avatar(128) }}"></td>
             <td>
                 <h1>Użytkownik: {{ user.nazwa }}</h1>
-                {% if user == current_user %}
-                <p><a href="{{ url_for('edytuj_profil') }}">Edytuj Profil</a></p>
-                {% endif %}
                 {% if user.o_mnie %}<p>{{ user.o_mnie }}</p>{% endif %}
                 {% if user.ostatnio_widziany %}
                 <p>
                     Ostatnio widziany: {{ user.ostatnio_widziany }}
+                </p>
+                {% endif %}
+                <p>{{ user.followers_count() }} obserwujących, {{user.following_count()}} obserwowanych</p>
+                {% if user == current_user %}
+                <p><a href="{{ url_for('edytuj_profil') }}">Edytuj Profil</a></p>
+                {% elif not current_user.is_following(user) %}
+                <p>
+                    <form action="{{ url_for('follow', nazwa=user.nazwa) }}" method="post">
+                        {{ form.hidden_tag() }}
+                        {{ form.submit(value='Obserwuj') }}
+                    </form>
+                </p>
+                {% else %}
+                <p>
+                    <form action="{{ url_for('unfollow', nazwa=user.nazwa) }}" method="post">
+                        {{ form.hidden_tag() }}
+                        {{ form.submit(value='Przestań obserwować') }}
+                    </form>
                 </p>
                 {% endif %}
             </td>
