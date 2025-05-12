@@ -1,3 +1,5 @@
+-----==== As always, use set instead of export if you are on Microsoft Windows. ===-----
+
 venv\Scripts\activate
 
 flask run
@@ -8,3 +10,5 @@ flask db upgrade
 
 u = User(username='bozydar', email='bozydar@gmail.com')
 u = User(username='hydrant', email='hydrant@gmail.com')
+
+set FLASK_DEBUG=1   (0)
