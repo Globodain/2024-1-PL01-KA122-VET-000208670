@@ -1,14 +1,8 @@
 {%extends "base.html"%}
 
-{%block content%}
-    <!-- Posts -->
-    <h2> Posts </h2>
-    {%for post in relatedPost%}
-        <div class="userPost">
-            <h4> {{ post['author']['username'] }} </h4>
-            <p>
-                {{ post['body'] }}
-            </p>
-        </div>
-    {%endfor%}
-{%endblock%}
+{% block content %}
+    <h1>Hi, {{ current_user.username }}!</h1>
+    {% for post in posts %}
+    <div><p>{{ post.author.username }} says: <b>{{ post.body }}</b></p></div>
+    {% endfor %}
+{% endblock %}
