@@ -1,4 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>Siemanko {{ user.name }}</h1>
+  <h1>Hello {{ current_user.username }}</h1>
+  <p>Welcome to the microblog!</p>
+  {% for post in posts %}
+    <div>
+      <h2>{{ post.title }}</h2>
+      <p>{{ post.body }}</p>
+      <p><small>Posted by {{ post.author.username }} on {{ post.timestamp }}</small></p>
+    </div>
+  {% endfor %}
 {% endblock %}
