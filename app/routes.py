@@ -10,6 +10,8 @@ from urllib.parse import urlsplit
 @app.route('/')
 @app.route('/index')
 @login_required
+
+
 def index():
     posts = [
         {
@@ -59,3 +61,12 @@ def register():
         flash('Gratulacje! Utworzyłeś konto!')
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
+
+@app.route('/user/<username>')
+def user(username):
+    user = db.first_or_404(sa.select(User).where(User.nazwa == username))
+    posts = [
+        {'author': user, 'body': 'Test post #1'},
+        {'author': user, 'body': 'Test post #2'}
+    ]
+    return render_template('user.html', user=user, posts=posts)
