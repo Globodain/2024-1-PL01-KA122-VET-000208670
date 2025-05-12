@@ -8,11 +8,24 @@ from flask_login import UserMixin
 from app import login
 from hashlib import md5
 
+followers = sqlalchemy.Table(
+    'followers',
+    db.metadata,
+    sqlalchemy.Column('follower_id', sqlalchemy.Integer, sqlalchemy.ForeignKey('user.id'),
+              primary_key=True),
+    sqlalchemy.Column('followed_id', sqlalchemy.Integer, sqlalchemy.ForeignKey('user.id'),
+              primary_key=True)
+)
+
 class User(UserMixin,db.Model):
     id: sql_orm.Mapped[int] = sql_orm.mapped_column(primary_key=True)
     username: sql_orm.Mapped[str] = sql_orm.mapped_column(sqlalchemy.String(64),unique=True, index=True)
     email: sql_orm.Mapped[str] = sql_orm.mapped_column(sqlalchemy.String(120),unique=True, index=True)
     password_hash: sql_orm.Mapped[Optional[str]] = sql_orm.mapped_column(sqlalchemy.String(256))
+    
+    
+    about_me: sql_orm.Mapped[Optional[str]] = sql_orm.mapped_column(sqlalchemy.String(140))
+    last_seen: sql_orm.Mapped[Optional[datetime]] = sql_orm.mapped_column(default=lambda:datetime.now(timezone.utc))
     
     posts: sql_orm.WriteOnlyMapped['Post'] = sql_orm.relationship(
         back_populates='author')
@@ -29,6 +42,8 @@ class User(UserMixin,db.Model):
     def avatar(self, size):
         digest = md5(self.email.lower().encode('utf-8')).hexdigest()
         return 'https://www.gravatar.com/avatar/{}?d=identicon&s={}'.format(digest, size)
+    
+    
     
 class Post(db.Model):
     id: sql_orm.Mapped[int] = sql_orm.mapped_column(primary_key=True)
