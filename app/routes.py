@@ -4,16 +4,12 @@ from app import app
 import sqlalchemy as sa
 from app import db
 from app.models import User
-from app.forms import LoginForm
+from app.forms import LoginForm, RegistrationForm, EditProfileForm, EmptyForm, PostForm
 from flask_login import logout_user
 from flask_login import login_required
 from flask import request
 from urllib.parse import urlsplit
 from datetime import datetime, timezone
-from app.forms import RegistrationForm
-from app.forms import EditProfileForm
-from app.forms import EmptyForm
-from app.forms import PostForm
 from app.models import Post
 from app.forms import ResetPasswordRequestForm
 from app.forms import ResetPasswordForm

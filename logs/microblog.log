@@ -78,3 +78,7 @@ Traceback (most recent call last):
   File "C:\Users\emili\microblog\venv\Lib\site-packages\flask\templating.py", line 99, in _get_source_fast
     raise TemplateNotFound(template)
 jinja2.exceptions.TemplateNotFound: email/reset_password.txt
+2025-05-12 09:25:45,690 INFO: Microblog startup [in C:\Users\emili\microblog\app\__init__.py:45]
+2025-05-12 09:45:19,066 INFO: Microblog startup [in C:\Users\emili\microblog\app\__init__.py:45]
+2025-05-12 09:48:04,153 INFO: Microblog startup [in C:\Users\emili\microblog\app\__init__.py:45]
+2025-05-12 09:51:35,579 INFO: Microblog startup [in C:\Users\emili\microblog\app\__init__.py:45]
