@@ -39,3 +39,13 @@ class EditProfileForm(FlaskForm):
     nazwa = StringField('Nazwa', validators=[DataRequired()])
     o_mnie = TextAreaField('O mnie', validators=[Length(min=0, max=140)])
     submit = SubmitField('Zapisz')
+
+    def __init__(self, original_nazwa, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.original_nazwa = original_nazwa
+
+    def validate_username(self, nazwa):
+        if nazwa.data != self.original_nazwa:
+            user = db.session.scalar(sa.select(User).where(User.nazwa == nazwa.data))
+            if user is not None:
+                raise ValidationError('Ta nazwa jest zajęta!')

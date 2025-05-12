@@ -79,7 +79,7 @@ def before_request():
 @app.route('/edytuj_profil', methods=['GET', 'POST'])
 @login_required
 def edytuj_profil():
-    form = EditProfileForm()
+    form = EditProfileForm(current_user.nazwa)
     if form.validate_on_submit():
         current_user.nazwa = form.nazwa.data
         current_user.o_mnie = form.o_mnie.data
