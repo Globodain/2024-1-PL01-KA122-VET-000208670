@@ -1,13 +1,4 @@
-2025-05-13 09:35:12,569 ERROR: Exception on /favicon.ico [GET] [in C:\Users\barte\cos\venv\Lib\site-packages\flask\app.py:1414]
-Traceback (most recent call last):
-  File "C:\Users\barte\cos\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1964, in _exec_single_context
-    self.dialect.do_execute(
-  File "C:\Users\barte\cos\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 945, in do_execute
-    cursor.execute(statement, parameters)
-sqlite3.OperationalError: no such table: user
-
-The above exception was the direct cause of the following exception:
-
+2025-05-13 12:40:15,355 ERROR: Exception on /reset_password_request [POST] [in C:\Users\barte\cos\venv\Lib\site-packages\flask\app.py:1414]
 Traceback (most recent call last):
   File "C:\Users\barte\cos\venv\Lib\site-packages\flask\app.py", line 2190, in wsgi_app
     response = self.full_dispatch_request()
@@ -15,75 +6,37 @@ Traceback (most recent call last):
   File "C:\Users\barte\cos\venv\Lib\site-packages\flask\app.py", line 1486, in full_dispatch_request
     rv = self.handle_user_exception(e)
          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\barte\cos\venv\Lib\site-packages\flask\app.py", line 1482, in full_dispatch_request
-    rv = self.preprocess_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\barte\cos\venv\Lib\site-packages\flask\app.py", line 1974, in preprocess_request
-    rv = self.ensure_sync(before_func)()
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\barte\cos\app\routes.py", line 12, in before_request
-    if current_user.is_authenticated:
-       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\barte\cos\venv\Lib\site-packages\werkzeug\local.py", line 311, in __get__
-    obj = instance._get_current_object()
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\barte\cos\venv\Lib\site-packages\werkzeug\local.py", line 515, in _get_current_object
-    return get_name(local())
-                    ^^^^^^^
-  File "C:\Users\barte\cos\venv\Lib\site-packages\flask_login\utils.py", line 25, in <lambda>
-    current_user = LocalProxy(lambda: _get_user())
-                                      ^^^^^^^^^^^
-  File "C:\Users\barte\cos\venv\Lib\site-packages\flask_login\utils.py", line 370, in _get_user
-    current_app.login_manager._load_user()
-  File "C:\Users\barte\cos\venv\Lib\site-packages\flask_login\login_manager.py", line 364, in _load_user
-    user = self._user_callback(user_id)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\barte\cos\app\models.py", line 102, in load_user
-    return db.session.get(User, int(id))
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\barte\cos\venv\Lib\site-packages\sqlalchemy\orm\scoping.py", line 1058, in get
-    return self._proxied.get(
-           ^^^^^^^^^^^^^^^^^^
-  File "C:\Users\barte\cos\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 3694, in get
-    return self._get_impl(
-           ^^^^^^^^^^^^^^^
-  File "C:\Users\barte\cos\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 3874, in _get_impl
-    return db_load_fn(
-           ^^^^^^^^^^^
-  File "C:\Users\barte\cos\venv\Lib\site-packages\sqlalchemy\orm\loading.py", line 694, in load_on_pk_identity
-    session.execute(
-  File "C:\Users\barte\cos\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2365, in execute
-    return self._execute_internal(
-           ^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\barte\cos\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2251, in _execute_internal
-    result: Result[Any] = compile_state_cls.orm_execute_statement(
-                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\barte\cos\venv\Lib\site-packages\sqlalchemy\orm\context.py", line 306, in orm_execute_statement
-    result = conn.execute(
-             ^^^^^^^^^^^^^
-  File "C:\Users\barte\cos\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1416, in execute
-    return meth(
-           ^^^^^
-  File "C:\Users\barte\cos\venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 523, in _execute_on_connection
-    return connection._execute_clauseelement(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\barte\cos\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1638, in _execute_clauseelement
-    ret = self._execute_context(
-          ^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\barte\cos\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1843, in _execute_context
-    return self._exec_single_context(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\barte\cos\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1983, in _exec_single_context
-    self._handle_dbapi_exception(
-  File "C:\Users\barte\cos\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2352, in _handle_dbapi_exception
-    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
-  File "C:\Users\barte\cos\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1964, in _exec_single_context
-    self.dialect.do_execute(
-  File "C:\Users\barte\cos\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 945, in do_execute
-    cursor.execute(statement, parameters)
-sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: user
-[SQL: SELECT user.id AS user_id, user.username AS user_username, user.email AS user_email, user.password_hash AS user_password_hash, user.about_me AS user_about_me, user.last_seen AS user_last_seen 
-FROM user 
-WHERE user.id = ?]
-[parameters: (2,)]
-(Background on this error at: https://sqlalche.me/e/20/e3q8)
+  File "C:\Users\barte\cos\venv\Lib\site-packages\flask\app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\barte\cos\venv\Lib\site-packages\flask\app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\barte\cos\app\routes.py", line 165, in reset_password_request
+    send_password_reset_email(user)
+  File "C:\Users\barte\cos\app\email.py", line 13, in send_password_reset_email
+    send_email('[Microblog] Reset Your Password',
+  File "C:\Users\barte\cos\app\email.py", line 9, in send_email
+    mail.send(msg)
+  File "C:\Users\barte\cos\venv\Lib\site-packages\flask_mail\__init__.py", line 539, in send
+    with self.connect() as connection:
+  File "C:\Users\barte\cos\venv\Lib\site-packages\flask_mail\__init__.py", line 127, in __enter__
+    self.host = self.configure_host()
+                ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\barte\cos\venv\Lib\site-packages\flask_mail\__init__.py", line 144, in configure_host
+    host = smtplib.SMTP(self.mail.server, self.mail.port)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\smtplib.py", line 255, in __init__
+    (code, msg) = self.connect(host, port)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\smtplib.py", line 341, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\smtplib.py", line 312, in _get_socket
+    return socket.create_connection((host, port), timeout,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\socket.py", line 851, in create_connection
+    raise exceptions[0]
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\socket.py", line 836, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] Nie mo¿na nawi¹zaæ po³¹czenia, poniewa¿ komputer docelowy aktywnie go odmawia
