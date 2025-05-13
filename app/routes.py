@@ -10,6 +10,9 @@ from app.forms import EditProfileForm
 from app.forms import PostForm
 from app.models import Post
 from app.forms import EmptyForm
+from app.forms import ResetPasswordRequestForm
+from app.email import send_password_reset_email
+from app.forms import ResetPasswordForm
 
 
 
@@ -80,7 +83,7 @@ def register():
 @app.route('/user/<username>')
 @login_required
 def user(username):
-    user = db.first_or_404(sa.select(User).where(User.username == username))
+    user = db.first_or_404(sa.select(User).where(User.nazwa == username))
     page = request.args.get('page', 1, type=int)
     query = user.posts.select().order_by(Post.timestamp.desc())
     posts = db.paginate(query, page=page,
@@ -160,3 +163,18 @@ def explore():
     query = sa.select(Post).order_by(Post.timestamp.desc())
     posts = db.session.scalars(query).all()
     return render_template('index.html', title='Explore', posts=posts)
+
+@app.route('/reset_password/<token>', methods=['GET', 'POST'])
+def reset_password(token):
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    user = User.verify_reset_password_token(token)
+    if not user:
+        return redirect(url_for('index'))
+    form = ResetPasswordForm()
+    if form.validate_on_submit():
+        user.set_password(form.password.data)
+        db.session.commit()
+        flash('Your password has been reset.')
+        return redirect(url_for('login'))
+    return render_template('reset_password.html', form=form)

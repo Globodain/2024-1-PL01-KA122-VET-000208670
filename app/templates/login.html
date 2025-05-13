@@ -23,4 +23,8 @@
         <p> {{ form.submit() }}</p>
     </form>
     <p>Nowy użytkownik? <a href="{{ url_for('register') }}">Stwórz konto!</a> </p>
+        <p>
+        Hasło ci się zgubiło, summonerze? Nawet Gragas pamięta, gdzie zostawił beczkę!
+        <a href="{{ url_for('reset_password_request') }}">Click to Reset It</a>
+    </p>
 {% endblock %}
