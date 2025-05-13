@@ -1,0 +1,134 @@
+2025-05-13 09:11:31,047 INFO: Microblog startup [in C:\Users\krzys\FolderPraca\app\__init__.py:47]
+2025-05-13 09:11:46,898 ERROR: Exception on /edit_profile [GET] [in C:\Users\krzys\FolderPraca\venv\Lib\site-packages\flask\app.py:875]
+Traceback (most recent call last):
+  File "C:\Users\krzys\FolderPraca\venv\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\krzys\FolderPraca\venv\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\krzys\FolderPraca\venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\krzys\FolderPraca\venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\krzys\FolderPraca\venv\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\krzys\FolderPraca\app\routes.py", line 78, in edit_profile
+    form = EditProfileForm(current_user.username)
+                           ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'User' object has no attribute 'username'
+2025-05-13 09:11:52,562 ERROR: Exception on /edit_profile [GET] [in C:\Users\krzys\FolderPraca\venv\Lib\site-packages\flask\app.py:875]
+Traceback (most recent call last):
+  File "C:\Users\krzys\FolderPraca\venv\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\krzys\FolderPraca\venv\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\krzys\FolderPraca\venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\krzys\FolderPraca\venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\krzys\FolderPraca\venv\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\krzys\FolderPraca\app\routes.py", line 78, in edit_profile
+    form = EditProfileForm(current_user.username)
+                           ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'User' object has no attribute 'username'
+2025-05-13 09:12:30,531 INFO: Microblog startup [in C:\Users\krzys\FolderPraca\app\__init__.py:47]
+2025-05-13 09:15:20,664 INFO: Microblog startup [in C:\Users\krzys\FolderPraca\app\__init__.py:47]
+2025-05-13 09:16:00,525 INFO: Microblog startup [in C:\Users\krzys\FolderPraca\app\__init__.py:47]
+2025-05-13 09:41:47,464 INFO: Microblog startup [in C:\Users\krzys\FolderPraca\app\__init__.py:47]
+2025-05-13 09:43:29,957 INFO: Microblog startup [in C:\Users\krzys\FolderPraca\app\__init__.py:47]
+2025-05-13 09:50:58,432 INFO: Microblog startup [in C:\Users\krzys\FolderPraca\app\__init__.py:47]
+2025-05-13 09:53:56,770 INFO: Microblog startup [in C:\Users\krzys\FolderPraca\app\__init__.py:47]
+2025-05-13 09:54:04,765 INFO: Microblog startup [in C:\Users\krzys\FolderPraca\app\__init__.py:47]
+2025-05-13 10:50:08,790 INFO: Microblog startup [in C:\Users\krzys\FolderPraca\app\__init__.py:47]
+2025-05-13 10:50:12,344 ERROR: Exception on /user/twój stary turbosprê¿arka [GET] [in C:\Users\krzys\FolderPraca\venv\Lib\site-packages\flask\app.py:875]
+Traceback (most recent call last):
+  File "C:\Users\krzys\FolderPraca\venv\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\krzys\FolderPraca\venv\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\krzys\FolderPraca\venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\krzys\FolderPraca\venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\krzys\FolderPraca\app\routes.py", line 83, in user
+    form = EmptyForm()
+           ^^^^^^^^^
+NameError: name 'EmptyForm' is not defined
+2025-05-13 10:50:12,954 ERROR: Exception on /user/twój stary turbosprê¿arka [GET] [in C:\Users\krzys\FolderPraca\venv\Lib\site-packages\flask\app.py:875]
+Traceback (most recent call last):
+  File "C:\Users\krzys\FolderPraca\venv\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\krzys\FolderPraca\venv\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\krzys\FolderPraca\venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\krzys\FolderPraca\venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\krzys\FolderPraca\app\routes.py", line 83, in user
+    form = EmptyForm()
+           ^^^^^^^^^
+NameError: name 'EmptyForm' is not defined
+2025-05-13 10:50:16,553 ERROR: Exception on /index [GET] [in C:\Users\krzys\FolderPraca\venv\Lib\site-packages\flask\app.py:875]
+Traceback (most recent call last):
+  File "C:\Users\krzys\FolderPraca\venv\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\krzys\FolderPraca\venv\Lib\site-packages\flask\app.py", line 920, in full_dispatch_request
+    return self.finalize_request(rv)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\krzys\FolderPraca\venv\Lib\site-packages\flask\app.py", line 939, in finalize_request
+    response = self.make_response(rv)
+               ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\krzys\FolderPraca\venv\Lib\site-packages\flask\app.py", line 1212, in make_response
+    raise TypeError(
+TypeError: The view function for 'index' did not return a valid response. The function either returned None or ended without a return statement.
+2025-05-13 10:50:17,994 ERROR: Exception on /index [GET] [in C:\Users\krzys\FolderPraca\venv\Lib\site-packages\flask\app.py:875]
+Traceback (most recent call last):
+  File "C:\Users\krzys\FolderPraca\venv\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\krzys\FolderPraca\venv\Lib\site-packages\flask\app.py", line 920, in full_dispatch_request
+    return self.finalize_request(rv)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\krzys\FolderPraca\venv\Lib\site-packages\flask\app.py", line 939, in finalize_request
+    response = self.make_response(rv)
+               ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\krzys\FolderPraca\venv\Lib\site-packages\flask\app.py", line 1212, in make_response
+    raise TypeError(
+TypeError: The view function for 'index' did not return a valid response. The function either returned None or ended without a return statement.
+2025-05-13 10:50:19,742 ERROR: Exception on /user/twój stary turbosprê¿arka [GET] [in C:\Users\krzys\FolderPraca\venv\Lib\site-packages\flask\app.py:875]
+Traceback (most recent call last):
+  File "C:\Users\krzys\FolderPraca\venv\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\krzys\FolderPraca\venv\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\krzys\FolderPraca\venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\krzys\FolderPraca\venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\krzys\FolderPraca\app\routes.py", line 83, in user
+    form = EmptyForm()
+           ^^^^^^^^^
+NameError: name 'EmptyForm' is not defined
