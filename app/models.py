@@ -4,6 +4,7 @@ import sqlalchemy.orm as orm
 from typing import Optional
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from hashlib import sha256
 
 class User(UserMixin, db.Model):
   id: orm.Mapped[int] = orm.mapped_column(primary_key=True)
@@ -20,7 +21,10 @@ class User(UserMixin, db.Model):
 
   def __repr__(self) -> str:
     return f"<User {self.username}>"
-  
+    
+  def avatar(self, size):
+    return f"https://www.gravatar.com/avatar/{sha256(self.email.encode('utf-8')).hexdigest()}?d=identicon&s={size}"
+
   
 class Post(db.Model):
   id: orm.Mapped[int] = orm.mapped_column(primary_key=True)
