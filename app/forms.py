@@ -46,3 +46,20 @@ class EditProfileForm(FlaskForm):
                 User.username == username.data))
             if user is not None:
                 raise ValidationError('Proszę użyć innej nazwy użytkownika.')
+
+class EmptyForm(FlaskForm):
+    submit = SubmitField('Submit')
+
+class PostForm(FlaskForm):
+    post = TextAreaField('Mów, wędrowcze, słowa me czekają', validators=[
+        DataRequired(), Length(min=1, max=140)])
+    submit = SubmitField('Opublikuj')
+
+class ResetPasswordRequestForm(FlaskForm):
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    submit = SubmitField('Zarządź resetowanie hasła')
+
+class ResetPasswordForm(FlaskForm):
+    password = PasswordField('Hasło', validators=[DataRequired()])
+    password2 = PasswordField('Powtórz hasło', validators=[DataRequired(), EqualTo('password')])
+    submit = SubmitField('Zarządź resetowanie hasła')

@@ -8,6 +8,8 @@ flask db migrate
 
 flask db upgrade
 
+flask shell
+
 u = User(username='bozydar', email='bozydar@gmail.com')
 u = User(username='hydrant', email='hydrant@gmail.com')
 
