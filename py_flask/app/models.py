@@ -16,22 +16,35 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    password_hash = db.Column(db.String(256), nullable=False)  # Ensure this field is always populated
-
+    password_hash = db.Column(db.String(256), nullable=False)
     about_me = db.Column(db.String(140), nullable=True)
     last_seen = db.Column(db.DateTime, default=sa.func.now(), index=True)
 
-    def avatar(self, size):
-        digest = hashlib.md5(self.email.lower().encode('utf-8')).hexdigest()
-        return f'https://www.gravatar.com/avatar/{digest}?d=identicon&s={size}'
-    def __repr__(self):
-        return f'User: {self.username}'  # Use f-string for better readability
+    # Define the relationship for followers
+    followed = db.relationship(
+        'User', secondary=followers,
+        primaryjoin=(followers.c.follower_id == id),
+        secondaryjoin=(followers.c.followed_id == id),
+        backref=db.backref('followers', lazy='dynamic'), lazy='dynamic'
+    )
 
-    def set_password(self, password):
-        self.password_hash = generate_password_hash(password)
+    def follow(self, user):
+        if not self.is_following(user):
+            self.followed.append(user)
 
-    def check_password(self, password):
-        return check_password_hash(self.password_hash, password)
+    def unfollow(self, user):
+        if self.is_following(user):
+            self.followed.remove(user)
+
+    def is_following(self, user):
+        return self.followed.filter(
+            followers.c.followed_id == user.id).count() > 0
+
+    def followers_count(self):
+        return self.followers.count()
+
+    def following_count(self):
+        return self.followed.count()
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -44,4 +57,17 @@ class Post(db.Model):
     def __repr__(self):
         return f'Post: {self.body}'  # Use f-string for better readability
 
-        # I can't write shit in Python
+def following_posts(self):
+        Author = so.aliased(User)
+        Follower = so.aliased(User)
+        return (
+            sa.select(Post)
+            .join(Post.author.of_type(Author))
+            .join(Author.followers.of_type(Follower), isouter=True)
+            .where(sa.or_(
+                Follower.id == self.id,
+                Author.id == self.id,
+            ))
+            .group_by(Post)
+            .order_by(Post.timestamp.desc())
+        )
