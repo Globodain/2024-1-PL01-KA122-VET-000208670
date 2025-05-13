@@ -27,6 +27,15 @@ class User(UserMixin,db.Model):
     about_me: sql_orm.Mapped[Optional[str]] = sql_orm.mapped_column(sqlalchemy.String(140))
     last_seen: sql_orm.Mapped[Optional[datetime]] = sql_orm.mapped_column(default=lambda:datetime.now(timezone.utc))
     
+    following: sql_orm.WriteOnlyMapped['User'] = sql_orm.relationship(
+        secondary=followers, primaryjoin=(followers.c.follower_id == id),
+        secondaryjoin=(followers.c.followed_id == id),
+        back_populates='followers')
+    followers: sql_orm.WriteOnlyMapped['User'] = sql_orm.relationship(
+        secondary=followers, primaryjoin=(followers.c.followed_id == id),
+        secondaryjoin=(followers.c.follower_id == id),
+        back_populates='following')
+    
     posts: sql_orm.WriteOnlyMapped['Post'] = sql_orm.relationship(
         back_populates='author')
     
@@ -43,6 +52,38 @@ class User(UserMixin,db.Model):
         digest = md5(self.email.lower().encode('utf-8')).hexdigest()
         return 'https://www.gravatar.com/avatar/{}?d=identicon&s={}'.format(digest, size)
     
+    def follow(self, user):
+        if not self.is_following(user):
+            self.following.add(user)
+
+    def unfollow(self, user):
+        if self.is_following(user):
+            self.following.remove(user)
+
+    def is_following(self, user):
+        query = self.following.select().where(User.id == user.id)
+        return db.session.scalar(query) is not None
+
+    def followers_count(self):
+        query = sqlalchemy.select(sqlalchemy.func.count()).select_from(
+            self.followers.select().subquery())
+        return db.session.scalar(query)
+
+    def following_count(self):
+        query = sqlalchemy.select(sqlalchemy.func.count()).select_from(
+            self.following.select().subquery())
+        return db.session.scalar(query)
+    
+    def following_posts(self):
+        Author = sql_orm.aliased(User)
+        Follower = sql_orm.aliased(User)
+        return (
+            sqlalchemy.select(Post)
+            .join(Post.author.of_type(Author))
+            .join(Author.followers.of_type(Follower))
+            .where(Follower.id == self.id)
+            .order_by(Post.timestamp.desc())
+        )
     
     
 class Post(db.Model):
