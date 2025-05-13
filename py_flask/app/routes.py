@@ -1,33 +1,25 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app
-from app.forms import LoginForm, RegistrationForm, EditProfileForm, EmptyForm  # Import EmptyForm here
+from app.forms import LoginForm, RegistrationForm, EditProfileForm, EmptyForm, PostForm
 from flask_login import current_user, login_user, logout_user, login_required
-import sqlalchemy as sa
 from app import db
-from app.models import User
+from app.models import User, Post 
 from datetime import datetime, timezone
+import sqlalchemy as sa
 
-@app.route('/')
-@app.route('/index')
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/index', methods=['GET', 'POST'])
 @login_required
 def index():
-    user = {'username': 'Berry Johns'}
-    relatedPost = [
-        {
-            'author': {'username': 'John Doe'},
-            'body': 'This is the first post!'
-        },
-        {
-            'author': {'username': 'Jane Doe'},
-            'body': 'This is the second post!'
-        },
-        {
-            'author': {'username': 'Alice Smith'},
-            'body': 'This is the third post!'
-        }
-    ]
-    return render_template('index.html', title='Home', user=user, relatedPost=relatedPost)
-
+    form = PostForm()  # Define the form
+    if form.validate_on_submit():
+        flash('Your post has been submitted!')
+        return redirect(url_for('index'))
+    page = request.args.get('page', 1, type=int)
+    posts = db.paginate(current_user.following_posts(), page=page, per_page=app.config['POSTS_PER_PAGE'], error_out=False)
+    next_url = url_for('index', page=posts.next_num) if posts.has_next else None
+    prev_url = url_for('index', page=posts.prev_num) if posts.has_prev else None
+    return render_template('index.html', title='Home', form=form, posts=posts.items, next_url=next_url, prev_url=prev_url)
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
@@ -65,13 +57,13 @@ def register():
 @login_required
 def user(username):
     user = db.first_or_404(sa.select(User).where(User.username == username))
-    posts = [
-        {'author': user, 'body': 'Test post #1'},
-        {'author': user, 'body': 'Test post #2'}
-    ]
+    page = request.args.get('page', 1, type=int)
+    query = db.session.query(Post).filter_by(author_id=user.id).order_by(Post.timestamp.desc())
+    posts = db.paginate(query, page=page, per_page=app.config['POSTS_PER_PAGE'], error_out=False)
+    next_url = url_for('user', username=user.username, page=posts.next_num) if posts.has_next else None
+    prev_url = url_for('user', username=user.username, page=posts.prev_num) if posts.has_prev else None
     form = EmptyForm()
-    return render_template('user.html', user=user, posts=posts, form=form)
-
+    return render_template('user.html', user=user, posts=posts.items, next_url=next_url, prev_url=prev_url, form=form)
 
 @app.before_request
 def before_request():
@@ -135,3 +127,36 @@ def unfollow(username):
         return redirect(url_for('user', username=username))
     else:
         return redirect(url_for('index'))
+
+@app.route('/explore')
+@login_required
+def explore():
+    page = request.args.get('page', 1, type=int)
+    posts = db.paginate(
+        db.session.query(Post).order_by(Post.timestamp.desc()),
+        page=page,
+        per_page=app.config['POSTS_PER_PAGE'],
+        error_out=False
+    )
+    next_url = url_for('explore', page=posts.next_num) if posts.has_next else None
+    prev_url = url_for('explore', page=posts.prev_num) if posts.has_prev else None
+    form = None  # No form needed for explore
+    return render_template("index.html", title='Explore', posts=posts.items, next_url=next_url, prev_url=prev_url, form=form)
+
+from app.forms import ResetPasswordRequestForm
+from app.email import send_password_reset_email
+
+@app.route('/resetpasswordrequest', methods=['GET', 'POST'])
+def reset_password_request():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    form = ResetPasswordRequestForm()
+    if form.validate_on_submit():
+        user = db.session.scalar(
+            sa.select(User).where(User.email == form.email.data))
+        if user:
+            send_password_reset_email(user)
+        flash('Check your email for the instructions to reset your password')
+        return redirect(url_for('login'))
+    return render_template('resetpasswordrequest.html', title='Reset Password', form=form)
+    

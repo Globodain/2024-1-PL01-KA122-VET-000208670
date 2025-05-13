@@ -1,8 +1,23 @@
-{%extends "base.html"%}
-
+{% extends "base.html" %}
 {% block content %}
-    <h1>Hi, {{ current_user.username }}!</h1>
+    <h1>Welcome, {{ current_user.username }}!</h1>
+    {% if form %}
+        <form method="post" action="{{ url_for('index') }}">
+            {{ form.hidden_tag() }}
+            {{ form.post.label }}<br>
+            {{ form.post(size=32) }}<br>
+            {{ form.submit() }}
+        </form>
+    {% endif %}
+    <hr>
     {% for post in posts %}
-    <div><p>{{ post.author.username }} says: <b>{{ post.body }}</b></p></div>
+        <p>{{ post.body }}</p>
     {% endfor %}
+    {% if prev_url %}
+    <a href="{{ prev_url }}">Newer posts</a>
+    {% endif %}
+    {% if next_url %}
+    <a href="{{ next_url }}">Older posts</a>
+    {% endif %}
+    
 {% endblock %}

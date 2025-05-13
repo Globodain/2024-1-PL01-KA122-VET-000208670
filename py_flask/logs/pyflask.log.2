@@ -1,4 +1,4 @@
-2025-05-13 11:53:24,545 ERROR: Exception on / [GET] [in C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\flask\app.py:875]
+2025-05-13 09:39:47,184 ERROR: Exception on /user/123 [GET] [in C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\flask\app.py:875]
 Traceback (most recent call last):
   File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
     response = self.full_dispatch_request()
@@ -15,9 +15,9 @@ Traceback (most recent call last):
   File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
     return current_app.ensure_sync(func)(*args, **kwargs)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\User\Documents\Code\py_flask\app\routes.py", line 19, in index
-    return render_template('index.html', title='Home', form=form, posts=posts.items, next_url=next_url, prev_url=prev_url)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\Documents\Code\py_flask\app\routes.py", line 73, in user
+    return render_template('user.html', user=user, posts=posts, form=form)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\flask\templating.py", line 150, in render_template
     return _render(app, template, context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -28,19 +28,43 @@ Traceback (most recent call last):
     self.environment.handle_exception()
   File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
     raise rewrite_traceback_stack(source=source)
-  File "C:\Users\User\Documents\Code\py_flask\app\templates\index.html", line 1, in top-level template code
+  File "C:\Users\User\Documents\Code\py_flask\app\templates\user.html", line 1, in top-level template code
     {% extends "base.html" %}
-  File "C:\Users\User\Documents\Code\py_flask\app\templates\base.html", line 35, in top-level template code
+  File "C:\Users\User\Documents\Code\py_flask\app\templates\base.html", line 34, in top-level template code
     {% block content %}{% endblock %}
     ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\User\Documents\Code\py_flask\app\templates\index.html", line 9, in block 'content'
-    {{ form.post.label }}<br>
-  File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\jinja2\environment.py", line 490, in getattr
-    return getattr(obj, attribute)
-           ^^^^^^^^^^^^^^^^^^^^^^^
-jinja2.exceptions.UndefinedError: 'app.forms.EmptyForm object' has no attribute 'post'
-2025-05-13 12:00:22,361 INFO: pyflask opened!; startup [in C:\Users\User\Documents\Code\py_flask\app\__init__.py:28]
-2025-05-13 12:00:25,713 ERROR: Exception on / [GET] [in C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\flask\app.py:875]
+  File "C:\Users\User\Documents\Code\py_flask\app\templates\user.html", line 27, in block 'content'
+    {% include '_post.html' %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\Documents\Code\py_flask\app\templates\_post.html", line 3, in top-level template code
+    <td><img src="{{ post.author.avatar(36) }}"></td>
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\jinja2\utils.py", line 92, in from_obj
+    if hasattr(obj, "jinja_pass_arg"):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jinja2.exceptions.UndefinedError: 'app.models.User object' has no attribute 'avatar'
+2025-05-13 09:42:23,285 INFO: pyflask opened!; startup [in C:\Users\User\Documents\Code\py_flask\app\__init__.py:28]
+2025-05-13 09:43:29,792 ERROR: Exception on /login [POST] [in C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\flask\app.py:875]
+Traceback (most recent call last):
+  File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\Documents\Code\py_flask\app\routes.py", line 39, in login
+    if user is None or not user.check_password(form.password.data):
+                           ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'User' object has no attribute 'check_password'
+2025-05-13 09:46:41,750 INFO: pyflask opened!; startup [in C:\Users\User\Documents\Code\py_flask\app\__init__.py:28]
+2025-05-13 11:48:44,185 INFO: pyflask opened!; startup [in C:\Users\User\Documents\Code\py_flask\app\__init__.py:28]
+2025-05-13 11:48:50,350 ERROR: Exception on / [GET] [in C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\flask\app.py:875]
 Traceback (most recent call last):
   File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
     response = self.full_dispatch_request()
@@ -57,12 +81,12 @@ Traceback (most recent call last):
   File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
     return current_app.ensure_sync(func)(*args, **kwargs)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\User\Documents\Code\py_flask\app\routes.py", line 14, in index
-    form = PostForm()
-          ^^^^^^^^
-NameError: name 'PostForm' is not defined
-2025-05-13 12:01:22,532 INFO: pyflask opened!; startup [in C:\Users\User\Documents\Code\py_flask\app\__init__.py:28]
-2025-05-13 12:01:37,482 ERROR: Exception on /user/123 [GET] [in C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\flask\app.py:875]
+  File "C:\Users\User\Documents\Code\py_flask\app\routes.py", line 15, in index
+    posts = db.paginate(current_user.following_posts(), page=page, per_page=app.config['POSTS_PER_PAGE'], error_out=False)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'User' object has no attribute 'following_posts'
+2025-05-13 11:50:45,660 INFO: pyflask opened!; startup [in C:\Users\User\Documents\Code\py_flask\app\__init__.py:28]
+2025-05-13 11:50:50,201 ERROR: Exception on / [GET] [in C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\flask\app.py:875]
 Traceback (most recent call last):
   File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
     response = self.full_dispatch_request()
@@ -79,52 +103,8 @@ Traceback (most recent call last):
   File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
     return current_app.ensure_sync(func)(*args, **kwargs)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\User\Documents\Code\py_flask\app\routes.py", line 58, in user
-    user = db.first_or_404(sa.select(User).where(User.username == username))
-                           ^^
-NameError: name 'sa' is not defined
-2025-05-13 12:04:07,821 INFO: pyflask opened!; startup [in C:\Users\User\Documents\Code\py_flask\app\__init__.py:28]
-2025-05-13 12:04:11,674 ERROR: Exception on /user/123 [GET] [in C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\flask\app.py:875]
-Traceback (most recent call last):
-  File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
-    response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
-    return current_app.ensure_sync(func)(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\User\Documents\Code\py_flask\app\routes.py", line 61, in user
-    query = user.posts.select().order_by(Post.timestamp.desc())
-            ^^^^^^^^^^^^^^^^^
-AttributeError: 'InstrumentedList' object has no attribute 'select'
-2025-05-13 12:05:26,551 INFO: pyflask opened!; startup [in C:\Users\User\Documents\Code\py_flask\app\__init__.py:28]
-2025-05-13 12:05:28,268 ERROR: Exception on /user/123 [GET] [in C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\flask\app.py:875]
-Traceback (most recent call last):
-  File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
-    response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
-    return current_app.ensure_sync(func)(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\User\Documents\Code\py_flask\app\routes.py", line 61, in user
-    query = db.session.query(Post).filter_by(author_id=user.id).order_by(Post.timestamp.desc())
-                             ^^^^
-NameError: name 'Post' is not defined
-2025-05-13 12:06:26,371 INFO: pyflask opened!; startup [in C:\Users\User\Documents\Code\py_flask\app\__init__.py:28]
+  File "C:\Users\User\Documents\Code\py_flask\app\routes.py", line 20, in index
+    return render_template('index.html', title='Home', form=form, posts=posts.items, next_url=next_url, prev_url=prev_url)
+                                                            ^^^^
+NameError: name 'form' is not defined
+2025-05-13 11:53:19,347 INFO: pyflask opened!; startup [in C:\Users\User\Documents\Code\py_flask\app\__init__.py:28]

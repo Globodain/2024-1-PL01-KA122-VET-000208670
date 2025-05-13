@@ -1,0 +1,109 @@
+2025-05-13 09:29:45,773 ERROR: Exception on /user/123 [GET] [in C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\flask\app.py:875]
+Traceback (most recent call last):
+  File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UndefinedTable: B£¥D:  relacja "followers" nie istnieje
+LINE 3: FROM "user", followers 
+                     ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\Documents\Code\py_flask\app\routes.py", line 73, in user
+    return render_template('user.html', user=user, posts=posts, form=form)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\User\Documents\Code\py_flask\app\templates\user.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "C:\Users\User\Documents\Code\py_flask\app\templates\base.html", line 34, in top-level template code
+    {% block content %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\Documents\Code\py_flask\app\templates\user.html", line 7, in block 'content'
+    <p>{{ user.followers_count() }} followers, {{ user.following_count() }} following.</p>
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\Documents\Code\py_flask\app\models.py", line 48, in followers_count
+    return self.followers.count()
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\sqlalchemy\orm\dynamic.py", line 199, in count
+    return self._generate(sess).count()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\sqlalchemy\orm\query.py", line 3147, in count
+    self._legacy_from_self(col).enable_eagerloads(False).scalar()
+  File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\sqlalchemy\orm\query.py", line 2836, in scalar
+    ret = self.one()
+          ^^^^^^^^^^
+  File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\sqlalchemy\orm\query.py", line 2809, in one
+    return self._iter().one()  # type: ignore
+           ^^^^^^^^^^^^
+  File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\sqlalchemy\orm\query.py", line 2858, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+                                                  ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2365, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2251, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\sqlalchemy\orm\context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1416, in execute
+    return meth(
+           ^^^^^
+  File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1638, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1843, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1983, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2352, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\User\Documents\Code\py_flask\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedTable) B£¥D:  relacja "followers" nie istnieje
+LINE 3: FROM "user", followers 
+                     ^
+
+[SQL: SELECT count(*) AS count_1 
+FROM (SELECT "user".id AS user_id, "user".username AS user_username, "user".email AS user_email, "user".password_hash AS user_password_hash, "user".about_me AS user_about_me, "user".last_seen AS user_last_seen 
+FROM "user", followers 
+WHERE followers.followed_id = %(param_1)s AND followers.follower_id = "user".id) AS anon_1]
+[parameters: {'param_1': 6}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-05-13 09:36:06,449 INFO: pyflask opened!; startup [in C:\Users\User\Documents\Code\py_flask\app\__init__.py:28]
+2025-05-13 09:36:16,038 INFO: pyflask opened!; startup [in C:\Users\User\Documents\Code\py_flask\app\__init__.py:28]
+2025-05-13 09:39:41,989 INFO: pyflask opened!; startup [in C:\Users\User\Documents\Code\py_flask\app\__init__.py:28]
