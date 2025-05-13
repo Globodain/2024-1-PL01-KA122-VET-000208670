@@ -49,3 +49,10 @@ if not app.debug:
     app.logger.info('Microblog startup')
 
 from app import routes, models, errors
+
+def create_app(config_class=Config):
+    app = Flask(__name__)
+
+
+    from app.api import bp as api_bp
+    app.register_blueprint(api_bp, url_prefix='/api')

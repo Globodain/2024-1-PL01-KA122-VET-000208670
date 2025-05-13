@@ -5,26 +5,29 @@
     <form action="" method="post" novalidate>
         {{ form.hidden_tag() }}
         <p>
-            {{form.nazwa.label}} <br>
+            {{ form.nazwa.label }}<br>
             {{ form.nazwa(size="35") }}<br>
             {% for error in form.nazwa.errors %}
-            <span style="color: red;">[{{ error }}]</span>
+                <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
         <p>
-            {{form.haslo.label}} <br>
+            {{ form.haslo.label }}<br>
             {{ form.haslo(size="35") }}<br>
             {% for error in form.haslo.errors %}
-            <span style="color: red;">[{{ error }}]</span>
+                <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
         <p>
-            {{ form.pamietaj_mnie() }} {{ form.pamietaj_mnie.label }}</p>
-        <p> {{ form.submit() }}</p>
-    </form>
-    <p>Nowy użytkownik? <a href="{{ url_for('register') }}">Stwórz konto!</a> </p>
+            {{ form.pamietaj_mnie() }} {{ form.pamietaj_mnie.label }}
+        </p>
         <p>
+            {{ form.submit() }}
+        </p>
+    </form>
+    <p>Nowy użytkownik? <a href="{{ url_for('register') }}">Stwórz konto!</a></p>
+    <p>
         Hasło ci się zgubiło, summonerze? Nawet Gragas pamięta, gdzie zostawił beczkę!
-        <a href="{{ url_for('reset_password_request') }}">Click to Reset It</a>
+        <a href="{{ url_for('reset_password', token=token) }}">Kliknij tutaj, aby je zresetować</a>
     </p>
 {% endblock %}
