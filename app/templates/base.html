@@ -10,6 +10,7 @@
     <div>
         Praktyka: 
         <a href="{{ url_for('index') }}">Strona Główna</a>
+        <a href="{{ url_for('explore') }}">Odkrywaj</a>
         {% if current_user.is_anonymous %}
         <a href="{{ url_for('login') }}">Zaloguj</a>
         {% else %}

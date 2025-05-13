@@ -37,4 +37,10 @@
     {% for post in posts %}
         {% include '_post.html' %}
     {% endfor %}
+    {% if prev_url %}
+        <a href="{{ prev_url }}">Nowsze wpisy</a>
+    {% endif %}
+    {% if next_url %}
+        <a href="{{ next_url }}">Starsze wpisy</a>
+    {% endif %}
 {% endblock %}
