@@ -1,4 +1,4 @@
-2025-05-13 11:34:06,427 ERROR: Exception on /reset_password_request [POST] [in C:\Users\JustSG\Desktop\mikroblog\microblog\venv\Lib\site-packages\flask\app.py:1414]
+2025-05-13 17:38:34,804 ERROR: Exception on /reset_password_request [POST] [in C:\Users\JustSG\Desktop\mikroblog\microblog\venv\Lib\site-packages\flask\app.py:1414]
 Traceback (most recent call last):
   File "C:\Users\JustSG\Desktop\mikroblog\microblog\venv\Lib\site-packages\flask_mail\__init__.py", line 540, in send
     message.send(connection)
@@ -52,11 +52,12 @@ Traceback (most recent call last):
     ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
                sender=app.config['ADMINS'][0],
                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    ...<3 lines>...
-               html_body=render_template('email/reset_password.html',
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-                                         user=user, token=token))
-                                         ^^^^^^^^^^^^^^^^^^^^^^^^
+               recipients=[user.email],
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+               text_body=render_template('email/reset_password.txt', user=user, token=token),
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+               html_body=render_template('email/reset_password.html', user=user, token=token))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "C:\Users\JustSG\Desktop\mikroblog\microblog\app\email.py", line 9, in send_email
     mail.send(msg)
     ~~~~~~~~~^^^^^
@@ -77,3 +78,50 @@ Traceback (most recent call last):
   File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.1008.0_x64__qbz5n2kfra8p0\Lib\smtplib.py", line 365, in send
     raise SMTPServerDisconnected('please run connect() first')
 smtplib.SMTPServerDisconnected: please run connect() first
+2025-05-13 18:32:07,701 INFO: Microblog startup [in C:\Users\JustSG\Desktop\mikroblog\microblog\app\__init__.py:45]
+2025-05-13 18:43:23,674 INFO: Microblog startup [in C:\Users\JustSG\Desktop\mikroblog\microblog\app\__init__.py:45]
+2025-05-13 18:43:30,401 INFO: Microblog startup [in C:\Users\JustSG\Desktop\mikroblog\microblog\app\__init__.py:45]
+2025-05-13 18:48:14,917 INFO: Microblog startup [in C:\Users\JustSG\Desktop\mikroblog\microblog\app\__init__.py:45]
+2025-05-13 19:04:40,120 ERROR: Exception on /api/tokens [POST] [in C:\Users\JustSG\Desktop\mikroblog\microblog\venv\Lib\site-packages\flask\app.py:1414]
+Traceback (most recent call last):
+  File "C:\Users\JustSG\Desktop\mikroblog\microblog\venv\Lib\site-packages\flask\app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JustSG\Desktop\mikroblog\microblog\venv\Lib\site-packages\flask\app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JustSG\Desktop\mikroblog\microblog\venv\Lib\site-packages\flask\app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JustSG\Desktop\mikroblog\microblog\venv\Lib\site-packages\flask\app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JustSG\Desktop\mikroblog\microblog\venv\Lib\site-packages\flask_httpauth.py", line 174, in decorated
+    return self.ensure_sync(f)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\JustSG\Desktop\mikroblog\microblog\app\api\tokens.py", line 8, in get_token
+    token = basic_auth.current_user().get_token()
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'User' object has no attribute 'get_token'
+2025-05-13 19:09:12,291 INFO: Microblog startup [in C:\Users\JustSG\Desktop\mikroblog\microblog\app\__init__.py:45]
+2025-05-13 19:09:12,351 INFO: Microblog startup [in C:\Users\JustSG\Desktop\mikroblog\microblog\app\__init__.py:45]
+2025-05-13 19:09:12,351 INFO: Microblog startup [in C:\Users\JustSG\Desktop\mikroblog\microblog\app\__init__.py:45]
+2025-05-13 19:09:32,718 INFO: Microblog startup [in C:\Users\JustSG\Desktop\mikroblog\microblog\app\__init__.py:45]
+2025-05-13 19:09:32,768 INFO: Microblog startup [in C:\Users\JustSG\Desktop\mikroblog\microblog\app\__init__.py:45]
+2025-05-13 19:09:32,768 INFO: Microblog startup [in C:\Users\JustSG\Desktop\mikroblog\microblog\app\__init__.py:45]
+2025-05-13 19:10:29,101 INFO: Microblog startup [in C:\Users\JustSG\Desktop\mikroblog\microblog\app\__init__.py:45]
+2025-05-13 19:10:29,152 INFO: Microblog startup [in C:\Users\JustSG\Desktop\mikroblog\microblog\app\__init__.py:45]
+2025-05-13 19:10:29,152 INFO: Microblog startup [in C:\Users\JustSG\Desktop\mikroblog\microblog\app\__init__.py:45]
+2025-05-13 19:10:39,767 INFO: Microblog startup [in C:\Users\JustSG\Desktop\mikroblog\microblog\app\__init__.py:45]
+2025-05-13 19:10:39,817 INFO: Microblog startup [in C:\Users\JustSG\Desktop\mikroblog\microblog\app\__init__.py:45]
+2025-05-13 19:10:39,817 INFO: Microblog startup [in C:\Users\JustSG\Desktop\mikroblog\microblog\app\__init__.py:45]
+2025-05-13 19:10:47,244 INFO: Microblog startup [in C:\Users\JustSG\Desktop\mikroblog\microblog\app\__init__.py:45]
+2025-05-13 19:10:47,296 INFO: Microblog startup [in C:\Users\JustSG\Desktop\mikroblog\microblog\app\__init__.py:45]
+2025-05-13 19:10:47,296 INFO: Microblog startup [in C:\Users\JustSG\Desktop\mikroblog\microblog\app\__init__.py:45]
+2025-05-13 19:11:02,094 INFO: Microblog startup [in C:\Users\JustSG\Desktop\mikroblog\microblog\app\__init__.py:45]
+2025-05-13 19:11:02,147 INFO: Microblog startup [in C:\Users\JustSG\Desktop\mikroblog\microblog\app\__init__.py:45]
+2025-05-13 19:11:02,147 INFO: Microblog startup [in C:\Users\JustSG\Desktop\mikroblog\microblog\app\__init__.py:45]
+2025-05-13 19:12:00,428 INFO: Microblog startup [in C:\Users\JustSG\Desktop\mikroblog\microblog\app\__init__.py:45]
+2025-05-13 19:12:00,482 INFO: Microblog startup [in C:\Users\JustSG\Desktop\mikroblog\microblog\app\__init__.py:45]
+2025-05-13 19:12:00,482 INFO: Microblog startup [in C:\Users\JustSG\Desktop\mikroblog\microblog\app\__init__.py:45]
+2025-05-13 19:12:12,822 INFO: Microblog startup [in C:\Users\JustSG\Desktop\mikroblog\microblog\app\__init__.py:45]
+2025-05-13 19:12:12,874 INFO: Microblog startup [in C:\Users\JustSG\Desktop\mikroblog\microblog\app\__init__.py:45]
+2025-05-13 19:12:12,874 INFO: Microblog startup [in C:\Users\JustSG\Desktop\mikroblog\microblog\app\__init__.py:45]
+2025-05-13 19:21:15,743 INFO: Microblog startup [in C:\Users\JustSG\Desktop\mikroblog\microblog\app\__init__.py:45]
