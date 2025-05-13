@@ -8,6 +8,9 @@ from logging.handlers import RotatingFileHandler
 import os
 from logging.handlers import SMTPHandler
 from flask_mail import Mail
+from flask import Blueprint
+from flask_moment import Moment
+bp = Blueprint("main", __name__)
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -16,7 +19,13 @@ migrate = Migrate(app, db)
 login = LoginManager(app)
 login.login_view = 'login'
 mail = Mail(app)
+moment = Moment(app)
+from app import routes
+from app import bp as main_bp
+app.register_blueprint(main_bp)
 
+from app.api import bp as api_bp
+app.register_blueprint(api_bp, url_prefix='/api')
 if not app.debug:
     if app.config['MAIL_SERVER']:
         auth = None
