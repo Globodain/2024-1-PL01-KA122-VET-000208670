@@ -56,4 +56,14 @@ class EmptyForm(FlaskForm):
 class PostForm(FlaskForm):
     post = TextAreaField('MÓW.', validators=[
         DataRequired(), Length(min=1, max=140)])
-    submit = SubmitField('Submit')
+    submit = SubmitField('Wstaw')
+
+class ResetPasswordRequestForm(FlaskForm):
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    submit = SubmitField('Poproś o zmianę hasła')
+
+class ResetPasswordForm(FlaskForm):
+    password = PasswordField('Hasło', validators=[DataRequired()])
+    password2 = PasswordField(
+        'Powtórz hasło', validators=[DataRequired(), EqualTo('password')])
+    submit = SubmitField('Poproś o zmianę hasła')
